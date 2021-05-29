@@ -1,7 +1,10 @@
-export function itemStyles(): string {
-    return `
-        <style>
-            :host {
+import { MeasurementsValue } from '../api/types';
+
+export function itemStyles(measurement: MeasurementsValue): HTMLStyleElement {
+    const style = document.createElement('style');
+    
+    style.textContent = `
+        :host {
                 background-color: #ffffff;
                 border-radius: 8px;
                 box-sizing: border-box;
@@ -21,7 +24,7 @@ export function itemStyles(): string {
             .box__value {
                 align-items: center;
                 box-sizing: border-box;
-                color: {{ measurement.color }};
+                color: ${measurement.color};
                 display: flex;
                 font-size: 36px;
                 justify-content: center;
@@ -39,6 +42,7 @@ export function itemStyles(): string {
                 font-size: 16px;
                 font-weight: 700;
             }
-        </style>
     `;
+    
+    return style;
 }

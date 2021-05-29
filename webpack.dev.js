@@ -18,9 +18,11 @@ module.exports = {
         ]
     },
     plugins: [
-        new CopyWebpackPlugin([
-            { from: './src/' }
-        ]),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: './src/' }
+            ]
+        }),
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
@@ -30,5 +32,4 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js'],
     },
-    watch: true,
 };

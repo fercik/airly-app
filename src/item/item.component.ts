@@ -9,6 +9,12 @@ export class ItemComponent extends HTMLElement {
         super();
         
         this._shadowRoot = this.attachShadow({ mode: 'open' });
+    }
+    
+    public connectedCallback() {
+        const attribute = this.getAttribute('measurement') || btoa('{}');
+        
+        this.measurement = JSON.parse(atob(attribute));
         this.render();
     }
     
@@ -19,8 +25,8 @@ export class ItemComponent extends HTMLElement {
     }
     
     private render(): void {
-        this._shadowRoot.innerHTML = itemTemplate({
+        this._shadowRoot.append(itemTemplate({
             measurement: this.measurement,
-        });
+        }));
     }
 }

@@ -1,25 +1,19 @@
-import { compile } from 'handlebars';
+import { listStyles } from './list.styles';
 
 interface ListTemplateProps {
     measurements: any[];
 }
 
-const template = compile(`
-    {{#each measurements}}
-        <airly-measurements-item measurement="{{this}}"></airly-measurements-item>
-    {{/each}}
-`);
-
-export function listTemplate(props: ListTemplateProps): string {
-    return `
-        <style>
-            :host {
-                align-items: flex-start;
-                display: flex;
-                flex-wrap: wrap;
-            }
-        </style>
+export function listTemplate({ measurements }: ListTemplateProps): DocumentFragment {
+    const documentFragment = document.createDocumentFragment();
+    documentFragment.append(listStyles());
+    
+    measurements.forEach((measurement: any) => {
+        const airlyMeasurementsItem = document.createElement('airly-measurements-item');
+        airlyMeasurementsItem.setAttribute('measurement', measurement);
         
-        ${template(props)}
-    `;
+        documentFragment.append(airlyMeasurementsItem);
+    });
+    
+    return documentFragment;
 }

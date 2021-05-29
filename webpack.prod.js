@@ -8,7 +8,7 @@ module.exports = {
     mode: 'production',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'main.[hash].js',
+        filename: 'main.[fullhash].js',
     },
     module: {
         rules: [
@@ -20,11 +20,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new CopyWebpackPlugin([
-            {
-                from: './src/',
-            }
-        ]),
         new HtmlPlugin({
             template: './src/index.html'
         }),

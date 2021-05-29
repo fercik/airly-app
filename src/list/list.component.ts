@@ -9,7 +9,6 @@ export class ListComponent extends HTMLElement {
     constructor() {
         super();
         this._shadowRoot = this.attachShadow({ mode: 'open' });
-        this.render();
     }
     
     public connectedCallback(): void {
@@ -18,11 +17,13 @@ export class ListComponent extends HTMLElement {
                 this.measurements = data;
                 this.render();
             });
+    
+        this.render();
     }
     
     private render(): void {
-        this._shadowRoot.innerHTML = listTemplate({
-            measurements: this.measurements.map(m => JSON.stringify(m)),
-        });
+        this._shadowRoot.append(listTemplate({
+            measurements: this.measurements.map(m => btoa(JSON.stringify(m))),
+        }));
     }
 }
