@@ -1,7 +1,7 @@
 import { listStyles } from './list.styles';
 
 interface ListTemplateProps {
-    measurements: any[];
+    measurements: string[];
 }
 
 export function listTemplate({ measurements }: ListTemplateProps): DocumentFragment {

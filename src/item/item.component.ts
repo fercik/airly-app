@@ -1,9 +1,7 @@
 import { itemTemplate } from './item.template';
-import { MeasurementsValue } from 'api/types';
 
 export class ItemComponent extends HTMLElement {
     private _shadowRoot: ShadowRoot;
-    private measurement = this.mapAttribute<MeasurementsValue>('measurement');
     
     constructor() {
         super();
@@ -13,20 +11,10 @@ export class ItemComponent extends HTMLElement {
     
     public connectedCallback() {
         const attribute = this.getAttribute('measurement') || btoa('{}');
+        const measurement = JSON.parse(atob(attribute));
         
-        this.measurement = JSON.parse(atob(attribute));
-        this.render();
-    }
-    
-    private mapAttribute<T>(attributeName: string): T {
-        const attribute = this.getAttribute(attributeName) || '{}';
-        
-        return JSON.parse(attribute) as T;
-    }
-    
-    private render(): void {
         this._shadowRoot.append(itemTemplate({
-            measurement: this.measurement,
+            measurement,
         }));
     }
 }

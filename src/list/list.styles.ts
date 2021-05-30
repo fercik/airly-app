@@ -3,10 +3,10 @@ export function listStyles(): HTMLStyleElement {
     
     styles.textContent = `
         :host {
-                align-items: flex-start;
-                display: flex;
-                flex-wrap: wrap;
-            }
+            align-items: flex-start;
+            display: flex;
+            flex-wrap: wrap;
+        }
     `;
     
     return styles;

@@ -13,9 +13,7 @@
     "deploy": "firebase deploy --only hosting"
   },
   "devDependencies": {
-    "@types/jest": "26.0.23",
     "@types/node": "15.6.1",
-    "copy-webpack-plugin": "9.0.0",
     "html-webpack-plugin": "5.3.1",
     "rimraf": "3.0.2",
     "terser-webpack-plugin": "5.1.2",

@@ -8,47 +8,19 @@ interface ItemTemplateProps {
 export function itemTemplate({ measurement }: ItemTemplateProps): DocumentFragment {
     const documentFragment = document.createDocumentFragment();
     const box = document.createElement('div');
-    const boxValue = document.createElement('div');
-    const boxInfo = document.createElement('div');
-    const boxInfoTitle = document.createElement('div');
-    const boxInfoCurrent = document.createElement('div');
-    const boxInfoMax = document.createElement('div');
     
-    // Box
     box.classList.add('box');
-    
-    // Box value
-    boxValue.classList.add('box__value');
-    
-    if (measurement.progress) {
-        boxValue.textContent = `${measurement.progress}%`;
-        box.append(boxValue);
-    }
-    
-    // Box info title
-    boxInfoTitle.classList.add('box__info__title');
-    boxInfoTitle.textContent = measurement.name;
-    
-    // Box info current
-    boxInfoCurrent.classList.add('box__info__content');
-    boxInfoCurrent.textContent = `Current: ${measurement.displayValue}`;
-    
-    // Box info max
-    boxInfoMax.classList.add('box__info__content');
-    boxInfoMax.textContent = `Max: ${measurement.max} ${measurement.unit}`;
-    
-    // Box info
-    boxInfo.classList.add('box__info');
-    boxInfo.append(boxInfoTitle);
-    boxInfo.append(boxInfoCurrent);
-    
-    if (measurement.max) {
-        boxInfo.append(boxInfoMax);
-    }
+    box.innerHTML = `
+        ${ measurement.progress ? `<div class="box__value">${measurement.progress}%</div>` : '' }
+        <div class="box__info">
+            <div class="box__info__title">${measurement.name}</div>
+            <div class="box__info__content">Current: ${measurement.displayValue}</div>
+            ${ measurement.max ? `<div class="box__info__content">Max: ${measurement.max} ${measurement.unit}</div>` : '' }
+        </div>
+    `;
     
     documentFragment.append(itemStyles(measurement));
     documentFragment.append(box);
-    documentFragment.append(boxInfo);
     
     return documentFragment;
 }

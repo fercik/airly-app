@@ -1,5 +1,5 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.ts',
@@ -18,10 +18,8 @@ module.exports = {
         ]
     },
     plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: './src/' }
-            ]
+        new HtmlPlugin({
+            template: './src/index.html'
         }),
     ],
     devServer: {
